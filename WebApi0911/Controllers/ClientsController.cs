@@ -132,6 +132,10 @@ namespace WebApi0911.Controllers
             db.Client.Add(client);
             db.SaveChanges();
 
+            //return Created(
+            //    Url.Link("GetClientById", new { id = client.ClientId }),
+            //    client);
+
             return CreatedAtRoute("GetClientById", new { id = client.ClientId }, client);
         }
 
