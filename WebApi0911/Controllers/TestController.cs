@@ -50,5 +50,11 @@ namespace WebApi0911.Controllers
         {
             return Ok(person.name + "-" + person.age);
         }
+
+        [Route("jsm")]
+        public IHttpActionResult GetSupportedMediaTypes()
+        {
+            return Ok(GlobalConfiguration.Configuration.Formatters.JsonFormatter.SupportedMediaTypes);
+        }
     }
 }
