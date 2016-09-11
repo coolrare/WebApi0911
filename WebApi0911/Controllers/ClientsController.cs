@@ -29,9 +29,9 @@ namespace WebApi0911.Controllers
             return db.Client;
         }
 
-        // GET: api/Clients/5
+        // GET: clients/5
         [ResponseType(typeof(Client))]
-        [Route("{id:int}")]
+        [Route("{id:int}", Name = "GetClientById")]
         public IHttpActionResult GetClient(int id)
         {
             Client client = db.Client.Find(id);
@@ -132,7 +132,7 @@ namespace WebApi0911.Controllers
             db.Client.Add(client);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = client.ClientId }, client);
+            return CreatedAtRoute("GetClientById", new { id = client.ClientId }, client);
         }
 
         // DELETE: api/Clients/5
