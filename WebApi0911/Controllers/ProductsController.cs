@@ -12,6 +12,7 @@ using WebApi0911.Models;
 
 namespace WebApi0911.Controllers
 {
+    [ValidateModel]
     public class ProductsController : ApiController
     {
         private FabricsEntities db = new FabricsEntities();
@@ -44,11 +45,6 @@ namespace WebApi0911.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutProduct(int id, Product product)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             if (id != product.ProductId)
             {
                 return BadRequest();
@@ -80,17 +76,12 @@ namespace WebApi0911.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PatchProduct(int id, ProductsPatchViewModel product)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var item = db.Product.Find(id);
 
             item.Price = product.Price;
 
             item.Stock = product.Stock;
-            
+
             try
             {
                 db.SaveChanges();
@@ -114,11 +105,6 @@ namespace WebApi0911.Controllers
         [ResponseType(typeof(Product))]
         public IHttpActionResult PostProduct(Product product)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             db.Product.Add(product);
             db.SaveChanges();
 
