@@ -79,7 +79,6 @@ namespace WebApi0911.Controllers
             var item = db.Product.Find(id);
 
             item.Price = product.Price;
-
             item.Stock = product.Stock;
 
             try
