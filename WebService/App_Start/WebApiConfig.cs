@@ -17,6 +17,8 @@ namespace WebService
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
+            config.EnableCors();
+
             // Web API 路由
             config.MapHttpAttributeRoutes();
 
