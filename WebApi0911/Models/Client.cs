@@ -9,9 +9,10 @@
 
 namespace WebApi0911.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Client
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -38,8 +39,10 @@ namespace WebApi0911.Models
         public Nullable<double> Latitude { get; set; }
         public string Notes { get; set; }
     
+        [JsonIgnore]
         public virtual Occupation Occupation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<Order> Order { get; set; }
     }
 }
