@@ -46,7 +46,7 @@ namespace WebApi0911.Controllers
         [Route("clients/{id}/orders/{orderId}")]
         public IHttpActionResult GetClientOrder(int id, int orderId)
         {
-            var order = db.Order.Where(p => p.ClientId == id && p.OrderId == orderId);
+            var order = db.Order.FirstOrDefault(p => p.ClientId == id && p.OrderId == orderId);
             if (order == null)
             {
                 return NotFound();
