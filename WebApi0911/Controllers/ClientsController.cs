@@ -43,6 +43,18 @@ namespace WebApi0911.Controllers
             return Ok(client);
         }
 
+        [Route("~/clients/type2/{id:int}")]
+        public Client GetClientType2(int id)
+        {
+            return db.Client.Find(id);
+        }
+
+        [Route("~/clients/type3/{id:int}")]
+        public IHttpActionResult GetClientType3(int id)
+        {
+            return Json(db.Client.Find(id));
+        }
+
         [ResponseType(typeof(Order))]
         [Route("{id}/orders/{orderId}")]
         public IHttpActionResult GetClientOrder(int id, int orderId)
