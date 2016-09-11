@@ -12,6 +12,7 @@ using WebApi0911.Models;
 
 namespace WebApi0911.Controllers
 {
+    [RoutePrefix("clients")]
     public class ClientsController : ApiController
     {
         private FabricsEntities db = new FabricsEntities();
@@ -22,7 +23,7 @@ namespace WebApi0911.Controllers
         }
 
         // GET: api/Clients
-        [Route("clients")]
+        [Route("")]
         public IQueryable<Client> GetClient()
         {
             return db.Client;
@@ -30,7 +31,7 @@ namespace WebApi0911.Controllers
 
         // GET: api/Clients/5
         [ResponseType(typeof(Client))]
-        [Route("clients/{id}")]
+        [Route("{id:int}")]
         public IHttpActionResult GetClient(int id)
         {
             Client client = db.Client.Find(id);
@@ -43,7 +44,7 @@ namespace WebApi0911.Controllers
         }
 
         [ResponseType(typeof(Order))]
-        [Route("clients/{id}/orders/{orderId}")]
+        [Route("{id}/orders/{orderId}")]
         public IHttpActionResult GetClientOrder(int id, int orderId)
         {
             var order = db.Order.FirstOrDefault(p => p.ClientId == id && p.OrderId == orderId);
@@ -55,7 +56,7 @@ namespace WebApi0911.Controllers
             return Ok(order);
         }
 
-        [Route("clients/{id}/orders")]
+        [Route("{id}/orders")]
         public IHttpActionResult GetClientOrders(int id)
         {
             var orders = db.Order.Where(p => p.ClientId == id);
@@ -63,7 +64,7 @@ namespace WebApi0911.Controllers
             return Ok(orders);
         }
 
-        [Route("clients/{id}/orders/pending")]
+        [Route("{id}/orders/pending")]
         public IHttpActionResult GetClientOrdersPending(int id)
         {
             var orders = db.Order.Where(p => p.ClientId == id && p.OrderStatus == "P");
@@ -71,7 +72,7 @@ namespace WebApi0911.Controllers
             return Ok(orders);
         }
 
-        [Route("clients/{id}/orders/{*date}")]
+        [Route("{id}/orders/{*date}")]
         public IHttpActionResult GetClientOrdersByDate(int id, DateTime date)
         {
             var orders = db.Order.Where(p => p.ClientId == id
@@ -84,6 +85,7 @@ namespace WebApi0911.Controllers
 
         // PUT: api/Clients/5
         [ResponseType(typeof(void))]
+        [Route("")]
         public IHttpActionResult PutClient(int id, Client client)
         {
             if (!ModelState.IsValid)
@@ -119,6 +121,7 @@ namespace WebApi0911.Controllers
 
         // POST: api/Clients
         [ResponseType(typeof(Client))]
+        [Route("")]
         public IHttpActionResult PostClient(Client client)
         {
             if (!ModelState.IsValid)
@@ -134,6 +137,7 @@ namespace WebApi0911.Controllers
 
         // DELETE: api/Clients/5
         [ResponseType(typeof(Client))]
+        [Route("")]
         public IHttpActionResult DeleteClient(int id)
         {
             Client client = db.Client.Find(id);
